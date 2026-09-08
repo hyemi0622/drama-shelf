@@ -8,6 +8,7 @@
   "use strict";
 
   const REGION = document.body.dataset.region || "cn";
+  const LOGIN_DOMAIN = "drama.app"; // 아이디 "hyejin" → hyejin@drama.app 으로 로그인
   const REGION_META = {
     cn: { name: "중국 드라마", short: "중드" },
     jp: { name: "일본 드라마", short: "일드" },
@@ -46,7 +47,7 @@
     _all() { try { return JSON.parse(localStorage.getItem(this._key) || "[]"); } catch { return []; } },
     _write(list) { localStorage.setItem(this._key, JSON.stringify(list)); },
     async user() { return { email: "미리보기" }; },
-    async sendLink() {},
+    async signIn() {},
     async signOut() {},
     async list(region) { return this._all().filter((d) => d.region === region); },
     async upsert(item) {
@@ -68,9 +69,9 @@
   const supaAdapter = {
     demo: false,
     async user() { const { data } = await sb.auth.getUser(); return data.user; },
-    async sendLink(email) {
-      const redirect = location.href.split("#")[0];
-      const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false, emailRedirectTo: redirect } });
+    async signIn(id, password) {
+      const email = id.includes("@") ? id : `${id.toLowerCase()}@${LOGIN_DOMAIN}`;
+      const { error } = await sb.auth.signInWithPassword({ email, password });
       if (error) throw error;
     },
     async signOut() { await sb.auth.signOut(); },
@@ -143,9 +144,9 @@
     <section class="auth-gate" id="authGate" hidden>
       <form class="auth-card" id="authForm">
         <h2>로그인</h2>
-        <label>이메일<input type="email" name="email" required autocomplete="email" inputmode="email"></label>
-        <button class="btn primary" type="submit" id="authBtn">로그인 링크 받기</button>
-        <p class="auth-sent" id="authSent" hidden>메일함에서 "Your sign-in link" 메일을 열고 Log In 링크를 누르세요.</p>
+        <label>아이디<input type="text" name="id" required autocomplete="username" autocapitalize="none"></label>
+        <label>비밀번호<input type="password" name="password" required autocomplete="current-password"></label>
+        <button class="btn primary" type="submit" id="authBtn">로그인</button>
         <p class="auth-err" id="authErr"></p>
       </form>
     </section>
@@ -210,10 +211,9 @@
   ───────────────────────────────────────────── */
   async function boot() {
     state.user = await db.user();
-    if (state.user && /access_token|refresh_token/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
     if (state.user) {
       el.gate.hidden = true; el.shelf.hidden = false;
-      el.userLabel.textContent = DEMO ? "" : state.user.email;
+      el.userLabel.textContent = DEMO ? "" : (state.user.email || "").replace("@" + LOGIN_DOMAIN, "");
       await reload();
     } else {
       el.gate.hidden = false; el.shelf.hidden = true;
@@ -224,12 +224,10 @@
     el.authErr.textContent = "";
     const btn = $("#authBtn"); btn.disabled = true;
     try {
-      await db.sendLink(el.authForm.email.value.trim());
-      $("#authSent").hidden = false;
-      btn.textContent = "다시 보내기";
+      await db.signIn(el.authForm.id.value.trim(), el.authForm.password.value);
+      await boot();
     } catch (err) {
-      const m = String(err?.message || "");
-      el.authErr.textContent = /rate|seconds|limit/i.test(m) ? "메일을 너무 자주 요청했어요. 잠시 뒤 다시 시도하세요." : "등록된 이메일이 아니에요.";
+      el.authErr.textContent = "아이디나 비밀번호가 맞지 않아요.";
     } finally { btn.disabled = false; }
   });
   $("#logoutBtn").addEventListener("click", async () => { await db.signOut(); location.reload(); });

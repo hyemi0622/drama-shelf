@@ -1,5 +1,5 @@
 /* 같은 사이트 파일은 네트워크 우선, 실패하면 캐시 */
-const CACHE = "drama-v3";
+const CACHE = "drama-v4";
 const SHELL = ["./", "./index.html", "./cn.html", "./jp.html", "./kr.html",
   "./css/base.css", "./css/cn.css", "./css/jp.css", "./css/kr.css",
   "./js/pwa.js", "./js/scenes.js", "./js/config.js", "./js/app.js", "./manifest.json",
