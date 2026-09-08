@@ -1,0 +1,38 @@
+/* 중국 드라마 · 비 오는 밤, 호수 위 정자와 등롱 */
+:root {
+  --font-display: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Roboto, system-ui, sans-serif;
+  --font-body: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Roboto, system-ui, sans-serif;
+  --bg: #0e1120;
+  --header-bg: #0d1024;
+  --header-ink: #f4e6cb;
+  --ink: #ece2cf;
+  --ink-soft: #9c94a8;
+  --card: #171a2e;
+  --field: #20233a;
+  --line: #2f3252;
+  --accent: #e8a13c;
+  --accent-ink: #1b1207;
+  --accent-soft: rgba(232, 161, 60, .16);
+  --vermilion: #b8352b;
+  --star: #f2b84a; --star-off: #3a3d5c;
+  --badge-bg: rgba(14, 17, 32, .8); --badge-ink: #f0dcb4;
+  --danger: #e0655e;
+  --overlay: rgba(4, 6, 16, .72);
+  --radius: 6px;
+  /* 격자창 무늬 띠 */
+  --ornament: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Crect width='16' height='8' fill='%23130f1e'/%3E%3Crect x='0' y='3' width='16' height='2' fill='%23c68b3a'/%3E%3Crect x='7' y='0' width='2' height='8' fill='%23c68b3a'/%3E%3C/svg%3E");
+}
+.site-header h1 { color: #f4e6cb; }
+.site-nav a { background: #171a2e; }
+.site-nav a.current { background: var(--vermilion); border-color: var(--vermilion); color: #fbe9d7; }
+.card { border: 1px solid #3a3550; outline: 1px solid rgba(232, 161, 60, .12); outline-offset: -4px; }
+.card .poster-wrap::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--vermilion); }
+.status-done .badge { background: var(--vermilion); color: #fbe9d7; }
+.chip.active { background: var(--vermilion); border-color: var(--vermilion); color: #fbe9d7; }
+.tag { background: rgba(184, 53, 43, .22); color: #f0c7b8; }
+.tag.active { background: var(--vermilion); color: #fbe9d7; }
+.quotes blockquote { border-left-color: var(--vermilion); }
+.detail-sections h4 { color: #d9a55a; }
+.stats, .modal-box, .auth-card { border: 1px solid #3a3550; outline: 1px solid rgba(232, 161, 60, .15); outline-offset: -5px; }
+input, select, textarea { background: #12142a; }
+.toast { background: #e8a13c; color: #1b1207; }

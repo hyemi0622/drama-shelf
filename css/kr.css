@@ -1,0 +1,68 @@
+/* 한국 드라마 · 한옥 사랑방, 창살에 비치는 촛불과 한지·병풍 */
+:root {
+  --font-display: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Roboto, system-ui, sans-serif;
+  --font-body: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Roboto, system-ui, sans-serif;
+  --bg: #241a12;
+  --header-bg: #1b140e;
+  --header-ink: #f5ecd8;
+  --ink: #f0e4cc;
+  --ink-soft: #b3a086;
+  --card: #f5ecd8;           /* 한지 */
+  --card-ink: #2b2118;
+  --card-soft: #7c6a58;
+  --field: #ece1c9;
+  --line: #5a4330;
+  --accent: #b9552f;         /* 단청 주홍 */
+  --accent-ink: #fff5e6;
+  --accent-soft: rgba(185, 85, 47, .16);
+  --candle: #e7b45a;
+  --jade: #5f8a73;
+  --navy: #2b3d5c;
+  --star: #d9963a; --star-off: #d5c7ab;
+  --badge-bg: rgba(43, 33, 24, .75); --badge-ink: #f5ecd8;
+  --danger: #b03a2e;
+  --overlay: rgba(20, 14, 9, .75);
+  --radius: 4px;
+  /* 창살 격자 띠 */
+  --ornament: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Crect width='12' height='8' fill='%23f1dfb2'/%3E%3Crect width='12' height='2' fill='%233b2415'/%3E%3Crect y='6' width='12' height='2' fill='%233b2415'/%3E%3Crect width='2' height='8' fill='%233b2415'/%3E%3C/svg%3E");
+}
+.site-header { border-bottom: 5px solid #3d2a19; }
+.site-header h1 { color: #f7ecd6; }
+.site-nav a { background: #3a2a1c; color: #e8d9be; border-color: #5a4330; }
+.site-nav a.current { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+/* 어두운 마루 위 컨트롤 */
+input, select, textarea { background: #f5ecd8; color: #2b2118; border-color: #5a4330; }
+.chip { background: #3a2a1c; color: #e8d9be; border-color: #5a4330; }
+.chip.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.toolbar .btn.ghost { background: #3a2a1c; color: #e8d9be; border-color: #5a4330; }
+.toolbar .btn.ghost.active { background: var(--jade); border-color: var(--jade); color: #fff; }
+.tag { background: #3a2a1c; color: #e8d9be; }
+.tag.active { background: var(--accent); color: var(--accent-ink); }
+.empty, .nothing, .tagbar-label { color: #b3a086; }
+
+/* 한지 카드: 창살 액자 */
+.card, .stats, .modal-box, .auth-card { color: var(--card-ink); border: 3px solid #1a120b; outline: 1px solid #5a4330; outline-offset: -6px; }
+.card-body h3, .detail-info h2, .drama-form h2, .auth-card h2 { color: var(--card-ink); }
+.orig, .prog small, .card-tags span, .stars b, .stars.none, .meta dt, .quotes footer, .tile span, .stats h4, .bar-col,
+.modal-box .muted, .modal-box label, .modal-box .link, .auth-card label, .quotes-head, .poster-drop, .close { color: var(--card-soft); }
+.modal-box .btn, .auth-card .btn, .stats .btn { color: var(--card-ink); border-color: #d9c9a8; background: #ece1c9; }
+.modal-box .btn.primary, .auth-card .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.modal-box .btn.danger { color: var(--danger); border-color: var(--danger); background: transparent; }
+.modal-box input, .modal-box select, .modal-box textarea, .auth-card input { border-color: #d9c9a8; }
+.modal-box .tag.static { background: #ece1c9; color: var(--card-ink); }
+.prog .bar { background: #d9c9a8; }
+.status-done .badge { background: var(--jade); color: #fff; }
+.status-watching .badge { background: var(--accent); color: var(--accent-ink); }
+.status-wish .badge { background: var(--navy); color: #fff; }
+.tile { background: #ece1c9; }
+.tile b { color: var(--accent); }
+.bar-fill { background: var(--candle); }
+.bar-fill em { color: var(--card-ink); }
+.quotes blockquote { border-left-color: var(--jade); background: #ece1c9; }
+.quotes blockquote p { font-style: italic; }
+.detail-sections h4 { color: var(--jade); }
+.detail-sections p, .top3 li, .meta dd, .rating-input b { color: var(--card-ink); }
+.stats { padding: 16px; }
+.quote-item { background: #ece1c9; }
+.toast { background: var(--candle); color: #2b2118; }
