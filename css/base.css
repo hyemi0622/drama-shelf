@@ -1,13 +1,21 @@
 /* 공용 구조 스타일 (모바일 기준). 색은 각 테마 CSS의 변수로.
    글자 크기는 rem, 여백/크기는 px. (js/pwa.js 가 시스템 글꼴 확대를 상쇄) */
-*, *::before, *::after { box-sizing: border-box; }
+/* 카카오톡 인앱 브라우저 확대 대응: 402px 고정 폭으로 그린 뒤 .stage 전체를 zoom 으로 화면 폭에 맞춘다 (js/pwa.js 가 --k 계산) */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
 html {
+  --env-top: env(safe-area-inset-top, 0px);
+  --env-bottom: env(safe-area-inset-bottom, 0px);
   font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
   background: var(--bg);
   touch-action: manipulation;
+  overflow-x: hidden;
 }
+.stage { width: 402px; margin: 0 auto; min-height: var(--stage-h, 100vh); zoom: var(--k, 1); }
+.modal, .toast { zoom: var(--k, 1); }
 body {
   margin: 0; min-height: 100vh;
   font-family: var(--font-body);
@@ -25,7 +33,7 @@ img { display: block; max-width: 100%; }
 .muted { color: var(--ink-soft); }
 
 /* 헤더: 장면 그림 + 제목/탭 + 장식 띠 */
-.site-header { padding-top: env(safe-area-inset-top); background: var(--header-bg); color: var(--header-ink); }
+.site-header { padding-top: var(--safe-top, 0px); background: var(--header-bg); color: var(--header-ink); }
 .scene { height: 168px; overflow: hidden; background: var(--header-bg); }
 .scene svg { width: 100%; height: 100%; display: block; }
 .title-bar { padding: 12px 16px 12px; text-align: center; }
@@ -38,7 +46,7 @@ img { display: block; max-width: 100%; }
 .site-nav a.current { color: var(--accent-ink); border-color: var(--accent); background: var(--accent); }
 .ornament { height: 8px; background: var(--ornament) repeat-x; background-size: auto 8px; }
 
-main { max-width: 560px; margin: 0 auto; padding: 14px 14px calc(40px + env(safe-area-inset-bottom)); }
+main { margin: 0 auto; padding: 14px 14px calc(40px + var(--safe-bottom, 0px)); }
 
 /* 로그인 */
 .auth-gate { display: grid; place-items: center; padding: 24px 0; }
@@ -130,8 +138,8 @@ input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
 .modal { position: fixed; inset: 0; background: var(--overlay); display: flex; align-items: flex-end; justify-content: center; z-index: 50; }
 .modal-box {
   position: relative; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-bottom: 0;
-  border-radius: 16px 16px 0 0; width: 100%; max-width: 560px; max-height: 92vh; max-height: 92dvh; overflow-y: auto;
-  padding: 20px 16px calc(24px + env(safe-area-inset-bottom)); animation: up .22s ease-out;
+  border-radius: 16px 16px 0 0; width: 100%; max-width: 560px; max-height: calc(var(--stage-h, 100vh) * .92); overflow-y: auto;
+  padding: 20px 16px calc(24px + var(--safe-bottom, 0px)); animation: up .22s ease-out;
 }
 @keyframes up { from { transform: translateY(24px); opacity: 0; } }
 .close { position: absolute; top: 6px; right: 8px; border: 0; background: none; font-size: 1.8rem; cursor: pointer; color: var(--ink-soft); line-height: 1; padding: 6px 10px; }
@@ -181,7 +189,7 @@ input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
 .form-actions .btn { flex: 1; }
 
 /* 토스트 */
-.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-size: .85rem; z-index: 99; white-space: nowrap; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + var(--safe-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-size: .85rem; z-index: 99; white-space: nowrap; }
 .toast.err { background: var(--danger); color: #fff; }
 
 /* 홈 */
@@ -194,6 +202,3 @@ input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
 .door.kr h2 { background: rgba(27, 20, 14, .8); color: #f0e4cc; }
 .card-body h3, .detail-info h2, .drama-form h2, .auth-card h2, .tile b { font-family: var(--font-display); }
 
-@media (min-width: 480px) {
-  .grid { grid-template-columns: repeat(4, 1fr); }
-}

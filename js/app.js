@@ -193,6 +193,8 @@
     formModal: $("#formModal"), formBox: $("#formBox"), toast: $("#toast"),
     userLabel: $("#userLabel"),
   };
+  // 고정 위치 요소는 zoom 된 무대 밖(body)으로 옮겨 각자 zoom 을 적용
+  document.body.append(el.detailModal, el.formModal, el.toast);
 
   /* ─────────────────────────────────────────────
      토스트
