@@ -30,7 +30,7 @@ supabase.sql     DB 만들기 SQL
 1. https://supabase.com 에서 **New project** 생성 (무료). Region은 Northeast Asia (Seoul/Tokyo) 추천.
 2. 왼쪽 **SQL Editor → New query** 에 `supabase.sql` 내용 전체를 붙여넣고 **Run**.
    → `dramas` 테이블, 보안 정책(RLS), `posters` 스토리지 버킷이 만들어져요.
-3. **Authentication → Users → Add user → Create new user** 로 본인 이메일/비밀번호 계정 하나 생성.
+3. **Authentication → Users → Add user → Create new user** 로 본인 이메일 계정 하나 생성 (비밀번호는 비워도 됨).
    (Auto Confirm User 체크)
 4. **Authentication → Sign In / Providers → Email** 에서 **Allow new users to sign up** 을 **끄기**.
    → 이제 나 말고는 아무도 가입/저장할 수 없어요.
@@ -61,7 +61,8 @@ window.SHELF_CONFIG = {
 
 ## 4. 사용
 
-- 처음 열면 로그인 화면 → 1-3에서 만든 이메일/비밀번호로 입장.
+- 처음 열면 로그인 화면 → 이메일 입력 → 메일로 온 링크 누르기. 비밀번호는 없습니다.
+- 무료 요금제의 기본 메일은 1시간에 2통까지만 보내지므로, 한 번 로그인하면 그 브라우저에서는 계속 유지됩니다. 홈 화면에 추가하기 전에 먼저 로그인해 두세요.
 - `+ 추가` → 포스터 탭해서 선택 → 정보 입력 → 저장.
 - 카드 탭 → 상세 보기 / 수정 / 삭제.
 - 상태를 "완주"로 바꾸면 완주일이 오늘로 자동 입력돼요.
