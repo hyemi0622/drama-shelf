@@ -2,6 +2,7 @@
    글자 크기는 rem, 여백/크기는 px. (js/pwa.js 가 시스템 글꼴 확대를 상쇄) */
 *, *::before, *::after { box-sizing: border-box; }
 html {
+  font-size: 16px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   background: var(--bg);
